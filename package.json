@@ -1,0 +1,21 @@
+{
+    "name": "discordmodbot",
+    "version": "1.1.1",
+    "description": "DiscordModBot",
+    "main": "bot.js",
+    "private": true,
+    "dependencies": {
+        "async": "latest",
+        "discord.js": "latest",
+        "dotenv": "latest",
+        "more-colorful-logger": "^1.0.6",
+        "ms": "latest",
+        "mysql": "latest",
+        "superagent": "^4.1.0",
+        "util": "^0.11.1"
+    },
+    "devDependencies": {
+        "eslint": "6.1.0"
+    },
+    "author": "KokosnussDEV"
+}
