@@ -3,7 +3,7 @@ module.exports = {
         let channel = params.message.channel;
         params.message.delete();
 
-        let filterQ1 = m => m.content.toLowerCase() == "yes" || m.content.toLowerCase() == "no" && m.author === params.message.author,
+        let filterQ1 = m => (m.content.toLowerCase() == "yes" || m.content.toLowerCase() == "no") && m.author === params.message.author,
             filterQ2 = m => m.author === params.message.author,
             filterQ3 = m => m.author === params.message.author && m.mentions.channels,
             filterQ4 = m => m.author === params.message.author,
