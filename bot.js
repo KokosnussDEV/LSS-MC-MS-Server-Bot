@@ -269,7 +269,7 @@ client.on("message", async message => {
     }
 
     // Not Working 
-    /* if (message.content === `${adminPrefix} announce`) {
+    if (message.content === `${adminPrefix} announce`) {
         require("./commands/announce").do({
             message: message,
             logChannel: logChannel,
@@ -277,7 +277,7 @@ client.on("message", async message => {
             version: version,
             staffrole: staffrole
         });
-    } */
+    }
 
     if (message.content.startsWith(`${prefix} game`)) {
         require("./commands/roleAdd_embed").do({

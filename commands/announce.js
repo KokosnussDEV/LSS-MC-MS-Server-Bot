@@ -11,8 +11,9 @@ module.exports = {
                 max: 1,
                 time: 30000
             },
-            everyone,
             txt,
+            everyone,
+            textToSend,
             channel2Send;
 
 
@@ -20,7 +21,7 @@ module.exports = {
             question1Answer = await channel.createMessageCollector(filterQ1, options);
 
         question1Answer.on("collected", async m => {
-            everyone = m.content == "yes" ? true : false;
+            everyone = m.content.toLowerCase() == "yes";
 
             await question1.delete();
         });
@@ -30,10 +31,10 @@ module.exports = {
                 question2Answer = await channel.createMessageCollector(filterQ2, options);
 
             question2Answer.on("collected", async m => {
-                console.log(m.toString());
-                txt = m.content.toString();
+                txt = m.content;
 
-                console.log(txt);
+                textToSend = `<a:lss_global_ani:609011670026682388> **Announcement** ${everyone ? "(@everyone)" : ""} <a:lss_global_ani:609011670026682388><a:weewoo:608542184169275392>
+${txt}`;
 
                 await question2.delete();
             });
@@ -48,35 +49,17 @@ module.exports = {
                     await question3.delete();
                 });
 
-                let textToSend = `<a:lss_global_ani:609011670026682388> **Announcement** ${everyone ? "(@everyone)" : ""} <a:lss_global_ani:609011670026682388><a:weewoo:608542184169275392>
-${txt}`;
+                //const textToSend = `<a:lss_global_ani:609011670026682388> **Announcement** ${everyone ? "(@everyone)" : ""} <a:lss_global_ani:609011670026682388><a:weewoo:608542184169275392>
+                //${txt}`;
 
                 question3Answer.on("end", async () => {
-                    let question4 = await channel.send("here is a quick preview of what I will send. Cancel with `cancel` proceed with `proceed`."),
-                        question4Answer = await channel.createMessageCollector(filterQ4, options);
-
-                    question4Answer.on("collect", async m => {
-                        if (!m.content === "proceed") {
-                            question4.delete();
-                            return;
-                        }
-                    });
-
-                    question4Answer.on("end", async () => {
-                        channel.send(`I will send the following message in ${channel2Send} with ${everyone ? "" : "no"} everyone tag`)
-                            .then(msg => {
-                                channel.send(textToSend)
-                                    .then(msg => {
-                                        setTimeout(() => {
-                                            msg.delete();
-                                            channel2Send.send(textToSend);
-                                        }, 19999);
-                                    });
-                                setTimeout(() => {
-                                    msg.delete();
-                                }, 1);
-                            });
-
+                    let previewMSG = await channel.send(`Here is a quick preview of what I will send in ${channel2Send} with ${everyone ? "" : "no"} everyone tag!`);
+                    let preview = channel.send(textToSend).then(msg => {
+                        setTimeout(() => {
+                            previewMSG.delete();
+                            preview.delete();
+                            channel2Send.send(textToSend);
+                        }, 20000);
                     });
                 });
             });
