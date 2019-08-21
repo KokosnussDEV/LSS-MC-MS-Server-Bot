@@ -17,15 +17,15 @@ module.exports = {
 
 
         let question1 = await channel.send("With tagging everyone?"),
-            question1Awnswer = await channel.createMessageCollector(filterQ1, options);
+            question1Answer = await channel.createMessageCollector(filterQ1, options);
 
-        question1Awnswer.on("collected", async m => {
+        question1Answer.on("collected", async m => {
             everyone = m.content == "yes" ? true : false;
 
             await question1.delete();
         });
 
-        question1Awnswer.on("end", async () => {
+        question1Answer.on("end", async () => {
             let question2 = await channel.send("Now, please send me your content!"),
                 question2Answer = await channel.createMessageCollector(filterQ2, options);
 
