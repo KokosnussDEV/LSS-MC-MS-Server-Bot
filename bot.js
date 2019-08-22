@@ -141,7 +141,8 @@ client.on("message", async message => { // eslint-disable-line
             message: message,
             args: adminArgs,
             appName: appName,
-            version: version
+            version: version,
+            staffrole: staffrole
         });
     }
 
