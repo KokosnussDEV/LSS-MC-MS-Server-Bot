@@ -11,7 +11,9 @@ module.exports = {
         if (!params.message.member.roles.has(params.staffrole)) {
             require("./commandModules/nopermEmbed").do({
                 message: params.message,
-                logChannel: params.logChannel
+                logChannel: params.logChannel,
+                appName: params.appName,
+                version: params.appVersion
             });
         }
 

@@ -106,9 +106,10 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 }); */
 
 // Commands
-client.on("message", async message => {
+client.on("message", async message => { // eslint-disable-line
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const adminArgs = message.content.slice(adminPrefix.length + 1).trim().split(/ +/g);
 
     // Checken ob die Nachricht aus einer Guild kam
     if (!message.guild) return;
@@ -138,7 +139,9 @@ client.on("message", async message => {
     if (message.content.startsWith(`${adminPrefix} ban`)) {
         require("./commands/ban").do({
             message: message,
-            args: args
+            args: adminArgs,
+            appName: appName,
+            version: version
         });
     }
 
@@ -148,7 +151,8 @@ client.on("message", async message => {
             args: args,
             appName: appName,
             version: version,
-            staffrole: staffrole
+            staffrole: staffrole,
+            prefix: adminPrefix
         });
     }
 
