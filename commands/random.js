@@ -11,9 +11,9 @@ module.exports = {
             body
         } = await superagent.get("http://aws.random.cat/meow");
 
-        if (!{
+        if (!{ //lgtm [js/trivial-conditional]
                 body
-            }) return params.message.channel.send("Oh sorry, there was an error getting a cat picture....Please try again!"); //lgtm [js/trivial-conditional]
+            }) return params.message.channel.send("Oh sorry, there was an error getting a cat picture....Please try again!");
 
         let catEmbed = new Discord.RichEmbed()
             .setTitle("Hier eine Katze...Meow!")

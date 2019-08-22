@@ -10,7 +10,7 @@ dotenv.config();
 //Erster LOG Channel schritt
 let logChannel;
 let welcomeChannel;
-let guild
+let guild;
 
 let appName = process.env.APP_NAME,
     version = process.env.DEV_VERSION,
@@ -149,7 +149,7 @@ client.on("message", async message => {
             appName: appName,
             version: version,
             staffrole: staffrole
-        })
+        });
     }
 
     // HELP Command

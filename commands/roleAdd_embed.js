@@ -58,7 +58,7 @@ module.exports = {
                     embed: logUS
                 });
             } else {
-                params.message.channel.send("A funny bunny error occured! Please Contact the Team!")
+                params.message.channel.send("A funny bunny error occured! Please Contact the Team!");
             }
         });
 
