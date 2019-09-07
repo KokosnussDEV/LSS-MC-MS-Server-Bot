@@ -1,15 +1,22 @@
 const Discord = require("discord.js");
 
 module.exports = {
+    getUserInTeam: (id, options) => {
+        let guild = options.message.guild;
+        let reactUser = guild.fetchMember(id);
+
+        return !reactUser.roles.has(options.params.staffrole)
+    },
     do: params => {
         const ONE_DAY_IN_MS = 86400000;
         let options = {
             message: params.message,
-            args: params.args
+            args: params.args,
+            params: params
         };
 
         if (!params.message.member.roles.has(params.staffrole)) {
-            require("./commandModules/nopermEmbed").do({
+            return require("./commandModules/nopermEmbed").do({
                 message: options.message,
                 logChannel: params.logChannel,
                 version: params.version,
@@ -39,7 +46,7 @@ module.exports = {
             msg.react("❌");
 
             setTimeout(() => {
-                let filter = (reaction, user) => (reaction.emoji.name === "✅" || reaction.emoji.name === "❌") && getUserInTeam(user.id);
+                let filter = (reaction, user) => (reaction.emoji.name === "✅" || reaction.emoji.name === "❌") && this.getUserInTeam(user.id, options);
                 console.log(user)
                 let collector = msg.createReactionCollector(filter);
 
@@ -65,15 +72,5 @@ module.exports = {
                 })
             }, ONE_DAY_IN_MS);
         });
-
-        let getUserInTeam = id => {
-            let guild = options.message.guild;
-            let reactUser = guild.fetchMember(id);
-
-            if (!reactUser.roles.has(params.staffrole)) {
-                return false;
-            }
-        }
-
     }
 };
