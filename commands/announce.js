@@ -1,7 +1,7 @@
 module.exports = {
     do: async params => {
         let channel = params.message.channel;
-        params.message.delete();
+        await params.message.delete();
 
         let filterQ1 = m => (m.content.toLowerCase() == "yes" || m.content.toLowerCase() == "no") && m.author === params.message.author,
             filterQ2 = m => m.author === params.message.author,
