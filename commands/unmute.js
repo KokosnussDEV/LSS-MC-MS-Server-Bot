@@ -19,7 +19,7 @@ module.exports = {
 
         if (!reason) return params.message.channel.send(`PLease give a reason! Format: \`${params.prefix}unmute <@user> <Reason>\``);
 
-        await db.query("SELECT `mutes` FROM `mute` WHERE `id` = ?", [member.id], (err, result) => {
+        await db.query("SELECT `mutes` FROM `mute` WHERE `id` = ?", [member.id], async (err, result) => {
             if (err) throw err;
             let mutes = result[0] ? result[0].mutes : 0;
             await member.removeRole(params.muterole, "unmute")

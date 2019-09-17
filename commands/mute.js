@@ -26,7 +26,7 @@ module.exports = {
             if (err) throw (err);
             let mutes = result[0] ? result[0].mutes + 1 : 1;
             let sql = !result[0] ? mysql.format("INSERT INTO `mute` (`id`, `username`, `mutes`) VALUE (?, ?, 1)", [member.id, member.user.username]) : mysql.format("UPDATE `mute` SET `mutes` = ? WHERE `id` = ?", [mutes, member.id]);
-            db.query(sql, err => {
+            db.query(sql, async err => {
                 if (err) throw (err);
                 await member.addRole(params.muterole, reason);
                 params.message.channel.send(`${member.user} was muted the ${mutes === 1 ? "first " : `${mutes} `}time!`);

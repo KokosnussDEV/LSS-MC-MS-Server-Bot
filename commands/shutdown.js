@@ -1,5 +1,5 @@
 module.exports = {
-    do: function (params) {
+    do: async params => {
         if (!params.message.member.roles.has(params.ownerID)) return params.message.channel.send("Nice try! :joy:");
 
         try {

@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const {
     createEmbed
 } = require("./commandModules/roleAddedEmbed");
@@ -30,7 +29,7 @@ module.exports = {
 
         params.message.delete();
 
-        let msg = params.message.channel.send(`I have added the ${game === "leitstellenspiel" ? `🇩🇪 leitstellenspiel.de` : `${game === "meldkamerspel" ? `🇳🇱 meldkamerspel.com` : `🇺🇸 missionchief.com`}`} role to you`)
+        params.message.channel.send(`I have added the ${game === "leitstellenspiel" ? `🇩🇪 leitstellenspiel.de` : `${game === "meldkamerspel" ? `🇳🇱 meldkamerspel.com` : `🇺🇸 missionchief.com`}`} role to you`)
             .then(msg => {
                 setTimeout(() => {
                     msg.delete();
