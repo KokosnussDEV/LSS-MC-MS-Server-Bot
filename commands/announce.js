@@ -1,7 +1,7 @@
 module.exports = {
     do: async params => {
         let channel = params.message.channel;
-        params.message.delete();
+        await params.message.delete();
 
         let filterQ1 = m => (m.content.toLowerCase() == "yes" || m.content.toLowerCase() == "no") && m.author === params.message.author,
             filterQ2 = m => m.author === params.message.author,
@@ -54,13 +54,14 @@ ${txt}`;
 
                 question3Answer.on("end", async () => {
                     let previewMSG = await channel.send(`Here is a quick preview of what I will send in ${channel2Send} with ${everyone ? "" : "no"} everyone tag!`);
-                    let preview = channel.send(textToSend).then(msg => {
-                        setTimeout(() => {
-                            previewMSG.delete();
-                            preview.delete();
-                            channel2Send.send(textToSend);
-                        }, 20000);
-                    });
+                    channel.send(textToSend)
+                        .then(msg => {
+                            setTimeout(() => {
+                                previewMSG.delete();
+                                msg.delete();
+                                channel2Send.send(textToSend);
+                            }, 20000);
+                        });
                 });
             });
         });
