@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js")
 
 module.exports = {
     do: params => {
         params.welcomeChannel.send(`Welcome to our United Discord ${params.member},
-Please assign yourself your game-roles. Therefor we implemented the commands \`!d leitstellenspiel\` , \`!d missionchief\` and \`!d meldkamerspel\`. You can also assign yourself more than one role if you play multiple games.
+Please assign yourself your game-roles. Therefor we implemented the commands \`$d leitstellenspiel\` , \`$d missionchief.com\`, \`$d missionchief.co.uk\` \`$d meldkamerspel\`. You can also assign yourself more than one role if you play multiple games.
 Please also read <#608360580775936001> and <#608541041309515786>.
 If you have any questions, feel free to ask!`);
 
@@ -19,4 +19,4 @@ If you have any questions, feel free to ask!`);
             embed: welEmbed
         });
     }
-};
+}

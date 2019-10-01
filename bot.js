@@ -4,10 +4,10 @@ const client = new Discord.Client({
     fetchAllMembers: true
 });
 
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
-//Erster LOG Channel schritt
+// Erster LOG Channel schritt
 let logChannel;
 let welcomeChannel;
 let guild;
@@ -22,6 +22,7 @@ let appName = process.env.APP_NAME,
     deRole = process.env.DE_ROLE_ID,
     nlRole = process.env.NL_ROLE_ID,
     usRole = process.env.US_ROLE_ID,
+    ukRole = process.env.UK_ROLE_ID,
     adminPrefix = process.env.ADMIN_PREFIX,
     welcomeChannelID = process.env.WELCOME_CHANNEL_ID,
     guildID = process.env.GUILD_ID;
@@ -43,7 +44,7 @@ client.on("ready", () => {
     });
 
     // Activity auf "Schaut auf Nachrichten" setzen
-    client.user.setActivity("on messages.", {
+    client.user.setActivity("messages.", {
         type: "WATCHING"
     });
 });
@@ -138,7 +139,16 @@ client.on("message", async message => {
     if (message.content.startsWith(`${adminPrefix} ban`)) {
         require("./commands/ban").do({
             message: message,
+<<<<<<< Updated upstream
             args: args
+=======
+            args: adminArgs,
+            appName: appName,
+            version: version,
+            staffrole: staffrole,
+            logChannel: logChannel,
+            client: client
+>>>>>>> Stashed changes
         });
     }
 
@@ -264,11 +274,12 @@ client.on("message", async message => {
             usRole: usRole,
             deRole: deRole,
             nlRole: nlRole,
+            ukRole: ukRole,
             logChannel: logChannel
         });
     }
 
-    // Not Working 
+    // Not Working
     if (message.content === `${adminPrefix} announce`) {
         require("./commands/announce").do({
             message: message,
@@ -288,7 +299,8 @@ client.on("message", async message => {
             version: version,
             usRole: usRole,
             deRole: deRole,
-            nlRole: nlRole
+            nlRole: nlRole,
+            ukRole: ukRole
         });
     }
 
